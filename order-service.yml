@@ -1,0 +1,17 @@
+spring:
+  kafka:
+    kafka-server: localhost:9092
+resilience4j:
+  circuitbreaker:
+    instances:
+      productService:
+        failureRateThreshold: 40
+        slowCallRateThreshold: 40
+        slowCallDurationThreshold: 2s
+        waitDurationInOpenState: 10s
+        permittedNumberOfCallsInHalfOpenState: 2
+        slidingWindowSize: 5
+        slidingWindowType: COUNT_BASED
+        minimumNumberOfCalls: 4
+        ignoreExceptions:
+          - java.lang.IllegalArgumentException
